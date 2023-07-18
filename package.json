@@ -1,13 +1,14 @@
 {
-  "name": "goit-react-hw-06-phonebook",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Oleksandra83.github.io/goit-react-hw-06-phonebook/",
+  "homepage": "https://Oleksandra83.github.io/goit-react-hw-07-phonebook/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
     "formik": "^2.4.2",
     "modern-normalize": "^2.0.0",
     "nanoid": "^4.0.2",

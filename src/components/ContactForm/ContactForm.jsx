@@ -1,12 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { Formik } from 'formik';
 import { schema} from 'shared/schemaYup';
 import 'yup-phone';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-// import { toastifyOptions } from 'untils/toastifyOptions';
-import { addContact } from "redux/contacts/contacts-slice";
-import { getContacts } from "redux/contacts/contacts-selectors";
+import { addContact } from '../../redux/contacts/contactsOperations';
+
 import { BsPersonFill, BsFillTelephoneFill } from 'react-icons/bs';
 import {IoMdPersonAdd} from 'react-icons/io'
 import {
@@ -19,46 +16,13 @@ import {
 	LabelSpan,
 } from './ContactForm.styled';
 
-const schema = yup.object().shape({
-	name: yup
-		.string()
-		.trim()
-		.matches(
-			/^[A-Za-z\u0080-\uFFFF ']+$/,
-			'Name may only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d`Artagnan'
-	).required(),
-	number: yup
-		.string()
-		.phone(
-			'UA',
-			true,
-			'Phone number must be a valid phone number for region UA, digits and can contain spaces, dashes, parentheses and can start with +'
-	).required(),
-});
-
-const initialValues = { name: '', number: '' };
+const initialValues = { name: '', phone: '' };
 
 export const ContactForm = () => {
-	const contacts = useSelector(getContacts);
 	const dispatch = useDispatch();
-	const isDublicate = ({ name, number }) => {
-		const normalizName = name.toLowerCase().trim();
-		const normalizNumber = number.trim();
-		const dublicate = contacts.find(
-			contact =>
-				contact.name.toLowerCase().trim() === normalizName ||
-				contact.number.trim() === normalizNumber
-		);
-		return Boolean(dublicate);
-	};
 
-	const onAddContact = ({ name, number }) => {
-		if (isDublicate({ name, number })) {
-			return toast.error(`This contact is already in contacts`,
-				toastifyOptions
-			);
-		}
-		dispatch(addContact({ name, number }));
+	const onAddContact = data => {
+		dispatch(addContact(data));
 	};
 
 	return (
@@ -89,7 +53,7 @@ export const ContactForm = () => {
 					</LabelForm>
 					<FieldInput
 						type="tel"
-						name="number"
+						name="phone"
 						placeholder="+38(096)000-00-00" />
 					<ErrorMessage name="number" component="span" />
 				</FormField>

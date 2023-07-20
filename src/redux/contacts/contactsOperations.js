@@ -47,6 +47,7 @@ export const addContact = createAsyncThunk(
 			const {
 				contacts: { items },
 			} = getState();
+			
 			if (isDublicate(items, data)) {
 				toast.error(`This contact is already in contacts`, toastifyOptions);
 				return false;

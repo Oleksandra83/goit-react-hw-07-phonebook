@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
-import * as yup from 'yup';
+import { schema} from 'shared/schemaYup';
 import 'yup-phone';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { toastifyOptions } from 'untils/toastifyOptions';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { toastifyOptions } from 'untils/toastifyOptions';
 import { addContact } from "redux/contacts/contacts-slice";
 import { getContacts } from "redux/contacts/contacts-selectors";
 import { BsPersonFill, BsFillTelephoneFill } from 'react-icons/bs';

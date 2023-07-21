@@ -6,8 +6,7 @@ export const Container = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin: 0 auto;
-	padding: 20px;
-	height: 100vh;
+	padding: 24px 14px;
 	width: 100%;
 `;
 
@@ -18,6 +17,5 @@ export const MainContainer = styled.main`
 	justify-content: center;
 	margin: 0 auto;
 	padding: 20px;
-	height: 100vh;
 	width: 100%;
 `

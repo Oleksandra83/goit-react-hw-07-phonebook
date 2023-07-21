@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import { toastifyOptions } from 'untils/toastifyOptions';
+import { Loader } from "components/Loader/Loader";
 import { fetchContacts } from "redux/contacts/contactsOperations";
 import {
 	selectContacts,
@@ -9,11 +10,9 @@ import {
 	selectFilteredContacts,
 	selectFilter,
 	selectIsLoading,
- } from '../../redux/selectors';
-import { IoPersonRemove } from 'react-icons/io5'
-import { List, ContactItem, ContactDelete, Item } from './ContactList.styled';
-
-import { deleteContact } from '../../redux/contacts/contactsOperations';
+} from '../../redux/selectors';
+import { List, Info } from './ContactList.styled';
+import { ContactItem } from '../ContactItem/ContactItem'
 
 export const ContactList = () => {
 	const contacts = useSelector(selectContacts);
@@ -37,29 +36,24 @@ export const ContactList = () => {
 
 	const filteredContacts = getFilterContacts(result);
 	
-	const onDeleteContact = contactId => {
-		dispatch(deleteContact(contactId));
-	};
 	return (
 		<>
-		{isLoading && contacts?.length === 0 && <div>Loading ... </div>}
+		{isLoading && contacts?.length === 0 && <Loader />}
 		{error && !isLoading && <div>Ooops, error ... </div>}
 		{!filteredContacts?.length && !error && !isLoading && (
-			<span>Contacts not found</span>
+			<Info>Contacts not found</Info>
 		)}
 		{!error && !isLoading && filteredContacts?.length > 0 && (
 			<List>
 			{filteredContacts?.map(({ name, phone, id }) => {
 				return (
-					<ContactItem key={id}>
-						<Item>{name}:</Item>
-						<Item>{phone}</Item>
-
-						<ContactDelete type="button" onClick={() => onDeleteContact(id)}>
-							< IoPersonRemove size="16" />
-							Delete
-						</ContactDelete>
-					</ContactItem>
+					<Fragment key={id}>
+						<ContactItem
+							name={name}
+							phone={phone}
+							id={id}
+						/>
+					</Fragment>
 				);
 			})}
 			</List>
